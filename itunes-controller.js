@@ -21,12 +21,14 @@ function ItunesController() {
         
           <div class="row">
             <div class="col-xs-12">
-              <div class="middle">
+              <div class="middle thumbnail">
                 <h3>${song.title}</h3>
                 <div class="art">
-                  <img src="${song.albumArt}">
+                <a class="thumbnail">
+                  <img src="${song.albumArt}" style="width:150px;height:150px;">
+                </a>
                 </div>
-                  <div class="info">
+                  <div class="info caption">
                     <h5>${song.artist}</h5>
                     <h5>${song.collection}</h5>
                     <h5>$${song.price}</h5>
@@ -37,6 +39,15 @@ function ItunesController() {
           </div>
       `
     }
+
+    document.addEventListener('play', function (e) {
+      var plyBtn = document.getElementsByTagName('audio')
+      for (var i = 0, len = plyBtn.length; i < len; i++) {
+        if (plyBtn[i] != e.target) {
+          plyBtn[i].pause()
+        }
+      }
+    }, true)
 
 
     document.getElementById('songs').innerHTML = template
